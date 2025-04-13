@@ -1,0 +1,430 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* Enhanced blue theme for dark mode */
+    --background: 220 35% 15%; /* Richer blue background */
+    --foreground: 210 40% 98%;
+    --card: 220 40% 17%; /* Slightly lighter blue for cards */
+    --card-foreground: 210 40% 98%;
+    --popover: 220 40% 17%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217 80% 65%; /* More vibrant blue */
+    --primary-foreground: 210 40% 98%;
+    --secondary: 220 45% 25%; /* Deeper blue for secondary elements */
+    --secondary-foreground: 210 40% 98%;
+    --muted: 220 45% 25%;
+    --muted-foreground: 220 40% 70%;
+    --accent: 220 45% 25%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 220 45% 25%;
+    --input: 220 45% 25%;
+    --ring: 217 80% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Add a blue overlay to enhance the blue theme in dark mode */
+.dark body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.15), transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Smooth theme transitions */
+.theme-transition {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Custom animations */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 1;
+    filter: brightness(1);
+  }
+  50% {
+    opacity: 0.8;
+    filter: brightness(1.2);
+  }
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Custom classes */
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 15s ease infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite linear;
+}
+
+.animate-rotate {
+  animation: rotate 20s linear infinite;
+}
+
+.glass-effect {
+  @apply bg-white/10 dark:bg-black/10 backdrop-blur-md border border-white/20 dark:border-white/10;
+}
+
+.glass-card {
+  @apply bg-white/80 dark:bg-black/80 backdrop-blur-md border border-white/20 dark:border-white/10 shadow-xl;
+}
+
+/* Enhanced glass card for dark mode */
+.dark .glass-card {
+  background: rgba(30, 58, 138, 0.15); /* Blue tint for glass in dark mode */
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(59, 130, 246, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.gradient-border {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.gradient-text {
+  @apply text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500;
+}
+
+.gradient-bg {
+  @apply bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500;
+}
+
+.gradient-subtle {
+  @apply bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-950/50 dark:via-indigo-950/50 dark:to-purple-950/50;
+}
+
+.noise-bg {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.05;
+}
+
+.tree-node-hover {
+  @apply transition-all duration-200 hover:translate-x-1;
+}
+
+.tree-connection {
+  @apply origin-left transition-all duration-300;
+}
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(155, 155, 155, 0.5) transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(155, 155, 155, 0.5);
+  border-radius: 20px;
+  border: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(155, 155, 155, 0.7);
+}
+
+.folder-icon {
+  @apply text-amber-400 dark:text-amber-300;
+  filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.3));
+}
+
+.file-icon {
+  @apply text-slate-400 dark:text-slate-300;
+  filter: drop-shadow(0 0 5px rgba(148, 163, 184, 0.2));
+}
+
+.node-icon {
+  @apply transition-all duration-300;
+}
+
+.node-icon:hover {
+  filter: brightness(1.2) drop-shadow(0 0 8px currentColor);
+}
+
+.hero-pattern {
+  background-color: rgba(255, 255, 255, 0.05);
+  background-image: radial-gradient(rgba(25, 118, 210, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Enhanced hero pattern for dark mode */
+.dark .hero-pattern {
+  background-color: rgba(30, 58, 138, 0.05);
+  background-image: radial-gradient(rgba(59, 130, 246, 0.15) 1px, transparent 1px);
+}
+
+.tooltip {
+  @apply absolute z-50 px-2 py-1 text-xs rounded shadow-lg bg-popover text-popover-foreground;
+  pointer-events: none;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(5px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.has-tooltip:hover .tooltip {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.loading-bar {
+  height: 3px;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+  background-size: 200% 200%;
+  animation: gradient-shift 2s ease infinite;
+}
+
+.loading-spinner {
+  @apply w-6 h-6 border-2 border-primary/30 border-t-primary rounded-full;
+  animation: rotate 1s linear infinite;
+}
+
+.card-hover-effect {
+  @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+}
+
+.button-glow {
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+}
+
+.button-glow:hover {
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.7);
+}
+
+.text-shadow {
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.text-shadow-sm {
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.text-glow {
+  text-shadow: 0 0 10px currentColor;
+}
+
+.bg-grid {
+  background-size: 40px 40px;
+  background-image: linear-gradient(to right, rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+}
+
+.bg-dots {
+  background-image: radial-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.05;
+}
+
+.bg-mesh {
+  background-color: hsla(0, 0%, 100%, 0.05);
+  background-image: radial-gradient(at 40% 20%, hsla(217, 100%, 50%, 0.1) 0px, transparent 50%),
+    radial-gradient(at 80% 0%, hsla(250, 100%, 50%, 0.1) 0px, transparent 50%),
+    radial-gradient(at 0% 50%, hsla(280, 100%, 50%, 0.1) 0px, transparent 50%),
+    radial-gradient(at 80% 50%, hsla(217, 100%, 50%, 0.1) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, hsla(250, 100%, 50%, 0.1) 0px, transparent 50%),
+    radial-gradient(at 80% 100%, hsla(280, 100%, 50%, 0.1) 0px, transparent 50%),
+    radial-gradient(at 0% 0%, hsla(217, 100%, 50%, 0.1) 0px, transparent 50%);
+}
+
+/* Enhanced mesh background for dark mode */
+.dark .bg-mesh {
+  background-color: transparent;
+  background-image: radial-gradient(at 40% 20%, hsla(217, 100%, 50%, 0.2) 0px, transparent 50%),
+    radial-gradient(at 80% 0%, hsla(250, 100%, 50%, 0.2) 0px, transparent 50%),
+    radial-gradient(at 0% 50%, hsla(280, 100%, 50%, 0.2) 0px, transparent 50%),
+    radial-gradient(at 80% 50%, hsla(217, 100%, 50%, 0.2) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, hsla(250, 100%, 50%, 0.2) 0px, transparent 50%),
+    radial-gradient(at 80% 100%, hsla(280, 100%, 50%, 0.2) 0px, transparent 50%),
+    radial-gradient(at 0% 0%, hsla(217, 100%, 50%, 0.2) 0px, transparent 50%);
+}
+
+.perspective-container {
+  perspective: 1000px;
+}
+
+.card-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
+}
+
+.card-3d:hover {
+  transform: rotateY(5deg) rotateX(5deg);
+}
+
+.card-3d-content {
+  transform: translateZ(20px);
+}
+
+.card-3d-shadow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0));
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.card-3d:hover .card-3d-shadow {
+  opacity: 1;
+}
+
+/* Blue background for dark mode */
+.dark .blue-bg {
+  background: linear-gradient(135deg, hsl(220, 70%, 15%), hsl(230, 60%, 10%));
+}
+
+/* Add this class to your main element */
+.dark-blue-theme {
+  @apply bg-background;
+}
+
+.dark .dark-blue-theme {
+  background: linear-gradient(135deg, hsl(220, 70%, 15%), hsl(230, 60%, 10%));
+  background-attachment: fixed;
+}
+
+/* Clean dark background - with blue for dark mode */
+.clean-dark-bg {
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 1), rgba(240, 240, 250, 1));
+}
+
+.dark .clean-dark-bg {
+  background: radial-gradient(circle at 50% 50%, rgba(30, 58, 138, 0.8), rgba(15, 23, 42, 0.9));
+}
+
+/* Clean light background */
+.clean-light-bg {
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 1), rgba(240, 240, 250, 1));
+}
