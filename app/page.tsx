@@ -1,5 +1,4 @@
 "use client"
-
 import { useState, useRef, useEffect, useCallback, useMemo, Suspense } from "react"
 import { RepoForm } from "@/components/ui/repo-form"
 import { ThemeToggle } from "@/components/ui/theme-toggle"
@@ -41,6 +40,7 @@ import { PredictiveCodeHealth } from "@/components/predictive-code-health"
 import { AICodeRelationship } from "@/components/ai-code-relationship"
 import { ExportTree } from "@/components/export-tree"
 import { ErrorBoundary } from "@/components/ui/error-boundary"
+import { AICodeReview } from "@/components/ai-code-review"
 
 export default function Home() {
   const [repoUrl, setRepoUrl] = useState("")
@@ -707,6 +707,11 @@ export default function Home() {
                       {activeTab === "export" && (
                         <div className="p-6">
                           <ExportTree tree={repoData.tree} />
+                        </div>
+                      )}
+                      {activeTab === "ai-review" && (
+                        <div className="p-6">
+                          <AICodeReview />
                         </div>
                       )}
                     </Suspense>
