@@ -19,6 +19,7 @@ import {
   BookOpen,
   Clock,
   Loader2,
+  BarChart,
 } from "lucide-react"
 import { InfoModal } from "@/components/ui/info-modal"
 import { useToast } from "@/components/ui/use-toast"
@@ -41,6 +42,7 @@ import { AICodeRelationship } from "@/components/ai-code-relationship"
 import { ExportTree } from "@/components/export-tree"
 import { ErrorBoundary } from "@/components/ui/error-boundary"
 import { AICodeReview } from "@/components/ai-code-review"
+import AnalyticsDashboard from "@/app/analytics/page"
 
 export default function Home() {
   const [repoUrl, setRepoUrl] = useState("")
@@ -615,7 +617,7 @@ export default function Home() {
                   </div>
 
                   <Tabs defaultValue="structure" value={activeTab} onValueChange={setActiveTab} className="mb-6">
-                    <TabsList className="grid w-full grid-cols-9 md:w-auto md:inline-flex">
+                    <TabsList className="grid w-full grid-cols-10 md:w-auto md:inline-flex">
                       <TabsTrigger value="structure" className="gap-2" aria-label="Structure view">
                         <FileTree className="h-4 w-4" aria-hidden="true" />
                         <span className="hidden md:inline">Structure</span>
@@ -651,6 +653,10 @@ export default function Home() {
                       <TabsTrigger value="sandbox" className="gap-2" aria-label="Code sandbox">
                         <Code className="h-4 w-4" aria-hidden="true" />
                         <span className="hidden md:inline">Sandbox</span>
+                      </TabsTrigger>
+                      <TabsTrigger value="analytics" className="gap-2" aria-label="Analytics dashboard">
+                        <BarChart className="h-4 w-4" aria-hidden="true" />
+                        <span className="hidden md:inline">Analytics</span>
                       </TabsTrigger>
                     </TabsList>
                   </Tabs>
@@ -712,6 +718,11 @@ export default function Home() {
                       {activeTab === "ai-review" && (
                         <div className="p-6">
                           <AICodeReview />
+                        </div>
+                      )}
+                      {activeTab === "analytics" && (
+                        <div className="p-6">
+                          <AnalyticsDashboard />
                         </div>
                       )}
                     </Suspense>
