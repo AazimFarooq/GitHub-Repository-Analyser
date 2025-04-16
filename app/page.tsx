@@ -658,6 +658,10 @@ export default function Home() {
                         <BarChart className="h-4 w-4" aria-hidden="true" />
                         <span className="hidden md:inline">Analytics</span>
                       </TabsTrigger>
+                      <TabsTrigger value="ai-review" className="gap-2" aria-label="AI Code Review">
+                        <Code className="h-4 w-4" aria-hidden="true" />
+                        <span className="hidden md:inline">AI Review</span>
+                      </TabsTrigger>
                     </TabsList>
                   </Tabs>
 
