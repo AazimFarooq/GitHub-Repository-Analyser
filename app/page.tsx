@@ -41,7 +41,7 @@ import { PredictiveCodeHealth } from "@/components/predictive-code-health"
 import { AICodeRelationship } from "@/components/ai-code-relationship"
 import { ExportTree } from "@/components/export-tree"
 import { ErrorBoundary } from "@/components/ui/error-boundary"
-import { AICodeReview } from "@/components/ai-code-review"
+import { AICodeReview } from "@/components/visualization/ai-code-review"
 import AnalyticsDashboard from "@/app/analytics/page"
 
 export default function Home() {
