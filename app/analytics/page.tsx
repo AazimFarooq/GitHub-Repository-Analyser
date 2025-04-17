@@ -14,7 +14,6 @@ import {
   PieChart,
   Pie,
   Cell,
-  Legend,
 } from "recharts"
 
 const AnalyticsDashboard = () => {
@@ -256,9 +255,16 @@ const AnalyticsDashboard = () => {
                 contentStyle={{ background: "#333", color: "#fff", borderRadius: "4px" }}
                 itemStyle={{ color: "#fff" }}
               />
-              <Legend wrapperStyle={{ fontFamily: "sans-serif", fontSize: "12px", color: "#fff" }} />
             </PieChart>
           </ResponsiveContainer>
+          <div className="flex justify-center mt-4">
+            {fileTypeData.map((entry, index) => (
+              <div key={index} className="flex items-center mr-4">
+                <div className="w-3 h-3 rounded-full mr-1" style={{ backgroundColor: entry.color }} />
+                <span className="text-sm">{entry.name}</span>
+              </div>
+            ))}
+          </div>
         </CardContent>
       </Card>
     </div>
