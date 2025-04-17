@@ -234,7 +234,7 @@ const AnalyticsDashboard = () => {
           <CardTitle>File Types Distribution</CardTitle>
           <p className="text-sm text-muted-foreground">Distribution of file types in the repository</p>
         </CardHeader>
-        <CardContent>
+        <CardContent className="flex flex-col items-center">
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
               <Pie
@@ -260,7 +260,7 @@ const AnalyticsDashboard = () => {
           <div className="flex justify-center mt-4">
             {fileTypeData.map((entry, index) => (
               <div key={index} className="flex items-center mr-4">
-                <div className="w-3 h-3 rounded-full mr-1" style={{ backgroundColor: entry.color }} />
+                <span className="inline-block w-3 h-3 rounded-full mr-1" style={{ backgroundColor: entry.color }} />
                 <span className="text-sm">{entry.name}</span>
               </div>
             ))}
