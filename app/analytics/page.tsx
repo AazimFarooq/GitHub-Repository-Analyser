@@ -67,7 +67,7 @@ const AnalyticsDashboard = () => {
 
   const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }: any) => {
     const RADIAN = Math.PI / 180
-    const radius = innerRadius + (outerRadius - innerRadius) * 0.6 // Adjust label position
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5
     const x = cx + radius * Math.cos(-midAngle * RADIAN)
     const y = cy + radius * Math.sin(-midAngle * RADIAN)
 
@@ -236,16 +236,13 @@ const AnalyticsDashboard = () => {
         </CardHeader>
         <CardContent className="flex flex-col items-center">
           <ResponsiveContainer width="100%" height={300}>
-            <PieChart margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-              {" "}
-              {/* Added margin */}
+            <PieChart>
               <Pie
                 dataKey="value"
                 data={fileTypeData}
                 cx="50%"
                 cy="50%"
-                innerRadius={70} // Increased innerRadius for a donut chart
-                outerRadius={90} // Increased outerRadius for larger slices
+                outerRadius={80}
                 fill="#8884d8"
                 labelLine={false}
                 label={renderCustomizedLabel}
